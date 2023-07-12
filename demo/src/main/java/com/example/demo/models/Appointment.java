@@ -7,7 +7,8 @@ import jakarta.persistence.*;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "appointments")
+@Entity
+@Table(name = "appointments")
 public class Appointment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

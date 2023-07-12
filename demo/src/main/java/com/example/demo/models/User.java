@@ -8,7 +8,8 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 public class User {
 
   @Id
