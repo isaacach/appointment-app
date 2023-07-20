@@ -1,4 +1,4 @@
-package com.example.demo.controllers;
+package com.example.demo.controller;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.repositories.UserRepository;
-import com.example.demo.models.User;
+import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
-@CrossOrigin
-@RequestMapping("/user")
+@RequestMapping(value = "/user", produces = "application/json")
 public class UserController {
 
   private final UserRepository userRepo;
@@ -29,7 +29,8 @@ public class UserController {
     this.userRepo = userRepo;
   }
 
-  @GetMapping
+  @CrossOrigin(origins = "http://localhost:5174")
+  @GetMapping("/users")
   public List<User> getUsers() {
     return userRepo.findAll();
   }

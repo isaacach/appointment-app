@@ -1,40 +1,53 @@
-import { Component } from 'react'
-import './App.css'
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default class App extends Component {
-  state = {
-    users: []
-  }
+function App() {
+  const [isLoading, setLoading] = useState(true);
+  const [user, setUser] = useState();
 
-  async componentDidMount() {
-    try {
-      const response = await fetch('http://localhost:8080/user');
-      const body = await response.json();
-      this.setState({users: body});
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
+  useEffect(() => {
+    axios.get(`http://localhost:8080/user/users`).then((response) => {
+      console.log(response);
+      setUser(response.data[0]);
+      setLoading(false);
+    });
+  }, []);
 
-
-  render() {
-    const {users} = this.state;
+  if (isLoading) {
     return (
-        <div className="App">
-          <header className="App-header">
-            <div className="App-intro">
-              <h2>Users</h2>
-              {users.map(user =>
-                  <div key={user.id}>
-                    {user.name} ({user.email})
-                  </div>
-              )}
-            </div>
-          </header>
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+          width: "100vw",
+          backgroundColor: "grey",
+        }}
+      >
+        Loading...
+      </div>
     );
   }
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        width: "100vw",
+        backgroundColor: "grey",
+      }}
+    >
+      <div>name: {user.name}</div>
+      <div>email: {user.email}</div>
+      <div>role: {user.role}</div>
+    </div>
+  );
 }
 
-
+export default App;
