@@ -63,4 +63,25 @@ public class UserController {
     return ResponseEntity.ok().build();
   }
 
+  @PostMapping("/login")
+  public ResponseEntity login(@RequestBody User user) {
+    User currentUser = userRepo.findByUsername(user.getUsername());
+    if (currentUser == null) {
+      return ResponseEntity.notFound().build();
+    }
+    if (!currentUser.getPassword().equals(user.getPassword())) {
+      return ResponseEntity.badRequest().build();
+    }
+    return ResponseEntity.ok(currentUser);
+  }
+
+  @PostMapping("/register")
+  public ResponseEntity register(@RequestBody User user) {
+    if (userRepo.findByUsername(user.getUsername()) != null) {
+      return ResponseEntity.badRequest().build();
+    }
+    User savedUser = userRepo.save(user);
+    return ResponseEntity.ok(savedUser);
+  }
+
 }

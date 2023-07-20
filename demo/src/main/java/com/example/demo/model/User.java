@@ -3,6 +3,8 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -11,9 +13,10 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
+  private String username;
   private String email;
   private String password;
-  private String role;
+  private String role = "user";
 
   @OneToMany(mappedBy = "user")
   private Set<Appointment> appointments;
@@ -36,6 +39,10 @@ public class User {
     return name;
   }
 
+  public String getUsername() {
+    return username;
+  }
+
   public String getEmail() {
     return email;
   }
@@ -54,6 +61,10 @@ public class User {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public void setAppointments(Set<Appointment> appointments) {
