@@ -1,51 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "./components/navbar";
+import './styles/App.css';
 
 function App() {
-  const [isLoading, setLoading] = useState(true);
-  const [user, setUser] = useState();
-
+  const [users, setUsers] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:8080/user/users`).then((response) => {
-      console.log(response);
-      setUser(response.data[0]);
-      setLoading(false);
-    });
+    axios.get(`http://localhost:8080/user/users`)
+        .then(res => {
+          const user = res.data;
+          setUsers(user);
+        })
   }, []);
 
-  if (isLoading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-          width: "100vw",
-          backgroundColor: "grey",
-        }}
-      >
-        Loading...
-      </div>
-    );
-  }
-
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        width: "100vw",
-        backgroundColor: "grey",
-      }}
-    >
-      <div>name: {user.name}</div>
-      <div>email: {user.email}</div>
-      <div>role: {user.role}</div>
+    <div className="App">
+      <Navbar />
+      <h1>React App</h1>
+      <h2>Users</h2>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
