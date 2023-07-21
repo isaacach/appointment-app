@@ -14,11 +14,4 @@ public class UserDto {
   public UserDto() {
   }
 
-  public UserDto(Long id, String name, String login, String token) {
-    this.id = id;
-    this.name = name;
-    this.login = login;
-    this.token = token;
-  }
-  
 }
