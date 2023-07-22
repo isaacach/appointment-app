@@ -7,6 +7,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Services from "./pages/Services.jsx";
 import Location from "./pages/Location.jsx";
+import Logout from "./components/Logout.jsx";
 
 import "./styles/App.css";
 import "./styles/navbar.css";
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/register" element={<Register />}></Route>
           <Route exact path="/services" element={<Services />}></Route>
           <Route exact path="/location" element={<Location />}></Route>
+          <Route exact path="/logout" element={<Logout/>}></Route>
         </Routes>
       </div>
   );
