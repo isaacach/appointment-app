@@ -1,8 +1,9 @@
 package com.example.demo.dto;
 
-import org.springframework.stereotype.Component;
 
-@Component
+import lombok.Builder;
+
+@Builder
 public class ErrorDto {
   
   private String message;
@@ -14,4 +15,12 @@ public class ErrorDto {
   public String getMessage() {
     return message;
   }
+
+  public ErrorDto() {
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
 }

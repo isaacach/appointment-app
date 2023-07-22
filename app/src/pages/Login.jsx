@@ -21,7 +21,7 @@ export default function Login() {
     event.preventDefault();
     const user = { username, password};
     try {
-      axios.post(`http://localhost:8080/user/login`, user).then((res) => {
+      axios.post(`http://localhost:8080/login`, user).then((res) => {
         console.log(res);
         console.log(res.data);
       });

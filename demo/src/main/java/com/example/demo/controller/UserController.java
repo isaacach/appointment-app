@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.User;
@@ -20,7 +19,6 @@ import com.example.demo.repository.UserRepository;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping(value = "/user", produces = "application/json")
 public class UserController {
 
   private final UserRepository userRepo;
@@ -29,7 +27,6 @@ public class UserController {
     this.userRepo = userRepo;
   }
 
-  @CrossOrigin(origins = "http://localhost:5174")
   @GetMapping("/users")
   public List<User> getUsers() {
     return userRepo.findAll();
@@ -40,7 +37,7 @@ public class UserController {
     return userRepo.findById(id).orElseThrow(RuntimeException::new);
   }
 
-  @PostMapping
+  @PostMapping("/user/create")
   public ResponseEntity createUser(@RequestBody User user) throws URISyntaxException {
     User savedUser = userRepo.save(user);
     return ResponseEntity.created(new URI("/user/" + savedUser.getId())).body(savedUser);
@@ -61,27 +58,6 @@ public class UserController {
   public ResponseEntity deleteUser(@PathVariable Long id) {
     userRepo.deleteById(id);
     return ResponseEntity.ok().build();
-  }
-
-  @PostMapping("/login")
-  public ResponseEntity login(@RequestBody User user) {
-    User currentUser = userRepo.findByUsername(user.getUsername());
-    if (currentUser == null) {
-      return ResponseEntity.notFound().build();
-    }
-    if (!currentUser.getPassword().equals(user.getPassword())) {
-      return ResponseEntity.badRequest().build();
-    }
-    return ResponseEntity.ok(currentUser);
-  }
-
-  @PostMapping("/register")
-  public ResponseEntity register(@RequestBody User user) {
-    if (userRepo.findByUsername(user.getUsername()) != null) {
-      return ResponseEntity.badRequest().build();
-    }
-    User savedUser = userRepo.save(user);
-    return ResponseEntity.ok(savedUser);
   }
 
 }

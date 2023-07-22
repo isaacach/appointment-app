@@ -31,7 +31,7 @@ export default function Register() {
     e.preventDefault();
     const user = { name, username, email, password };
     try {
-      axios.post(`http://localhost:8080/user/register`, user).then((res) => {
+      axios.post(`http://localhost:8080/register`, user).then((res) => {
         console.log(res);
         console.log(res.data);
         navigate("/login");
