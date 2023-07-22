@@ -22,8 +22,8 @@ export default function Login() {
     const user = { username, password};
     try {
       axios.post(`http://localhost:8080/login`, user).then((res) => {
-        console.log(res);
         console.log(res.data);
+        window.localStorage.setItem("token", res.data.token);
       });
       navigate("/");
     } catch (error) {
