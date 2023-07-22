@@ -38,6 +38,7 @@
   gap: 13px;
   height: 100%;
   margin-left: 30px;
+  cursor: pointer;
 }
 
 .navbar-logo p {
