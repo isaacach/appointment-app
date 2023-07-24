@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/login.css';
 
 export default function Login() {
@@ -24,6 +24,7 @@ export default function Login() {
       axios.post(`http://localhost:8080/login`, user).then((res) => {
         console.log(res.data);
         window.localStorage.setItem("token", res.data.token);
+        window.localStorage.setItem("user", res.data.id);
       });
       navigate("/");
     } catch (error) {

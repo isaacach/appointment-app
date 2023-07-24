@@ -1,12 +1,18 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Optional;
 
 import jakarta.persistence.*;
 
 @Data
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "appointments")
 public class Appointment {
@@ -18,5 +24,6 @@ public class Appointment {
   private String description;
 
   @ManyToOne
-  private User user;
+  @JoinColumn(name = "user_id")
+  public User user;
 }
