@@ -7,7 +7,8 @@ export default function MakeAppointment() {
   const [date, setDate] = useState("")
   const [time, setTime] = useState("")
   const [description, setDescription] = useState("")
-  const user = window.localStorage.getItem("user");
+  const userId = window.localStorage.getItem("user");
+
 
   const handleDate = (event) => {
     setDate(event.target.value);
@@ -23,7 +24,8 @@ export default function MakeAppointment() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const appointment = { date, time, description, user};
+    const appointment = { date, time, description, userId};
+
     try {
       axios.post(`http://localhost:8080/appointments/create`, appointment).then((res) => {
         console.log(res.data);

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.example.demo.model.Appointment;
 import com.example.demo.model.User;
 import com.example.demo.repository.AppointmentRepository;
@@ -45,8 +44,10 @@ public class AppointmentController {
   }
 
   @PostMapping("/appointments/create")
-  public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointment) {
+  public ResponseEntity<Appointment> createAppointment(@RequestBody Object appointment) {
+    Appointment newAppointment = new Appointment();
+    appointment.setUser(userRepository.findByEmail(appointment.userId));
     return ResponseEntity.ok(appointmentRepository.save(appointment));
   }
-  
+
 }
