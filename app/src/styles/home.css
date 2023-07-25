@@ -17,6 +17,7 @@
   width: 100%;
   height: calc(100vh - 80px);
   object-fit: cover;
+  filter: brightness(0.5);
 }
 
 .home-hero-text {
@@ -26,15 +27,19 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100%;
-  background-color: rgba(255,192,203, 0.4);
+  color: rgb(255, 255, 255);
   padding: 20px;
 }
 
 .home-hero-text h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1rem;
+}
+
+.home-hero-text h2 {
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .home-about {
