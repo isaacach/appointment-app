@@ -37,12 +37,13 @@ return (
     max="2024-01-27T00:00"
     minTime="08:00"
     maxTime="19:59"
+    display="center"
     stepMinute={60}
-    display="flex"
     labels={myLabels}
     invalid={myInvalid}
+    theme="material"
+    themeVariant="dark"
     inputProps={{
-      inputStyle: "box",
       placeholder: "Please Select date",
     }}
   />
