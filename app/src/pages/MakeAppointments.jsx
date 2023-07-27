@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react'
+import Calender from '../components/Calender.jsx'
 
 import '../styles/makeAppointment.css'
 
@@ -55,6 +56,7 @@ export default function MakeAppointment() {
         <input onChange={handleDescription} type="text" />
         <button type="submit">Submit</button>
       </form>
+      <Calender />
     </div>
   );
 }
