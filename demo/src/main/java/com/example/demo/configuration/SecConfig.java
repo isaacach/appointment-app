@@ -28,7 +28,7 @@ public class SecConfig {
         .csrf().disable()
         .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests((requests) -> requests
-            .requestMatchers(HttpMethod.POST, "/login", "/register", "/appointments/create").permitAll()
+            .requestMatchers(HttpMethod.POST, "/login", "/register", "/appointments/create", "/appointments/create/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/users", "/user/**").permitAll()
             .anyRequest().authenticated());
     return http.build();

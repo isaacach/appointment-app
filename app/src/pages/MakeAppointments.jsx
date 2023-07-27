@@ -24,10 +24,14 @@ export default function MakeAppointment() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const appointment = { date, time, description, userId};
+    const appointment = { date, time, description};
 
     try {
-      axios.post(`http://localhost:8080/appointments/create`, appointment).then((res) => {
+      axios.post(`http://localhost:8080/appointments/create/${userId}`, appointment,
+      { 
+        headers: { 'Content-Type': 'application/json' }
+      }
+      ).then((res) => {
         console.log(res.data);
       });
 

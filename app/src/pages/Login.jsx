@@ -21,10 +21,12 @@ export default function Login() {
     event.preventDefault();
     const user = { username, password};
     try {
-      axios.post(`http://localhost:8080/login`, user).then((res) => {
+      axios.post(`http://localhost:8080/login`, user,
+      { headers: { 'Content-Type': 'application/json' } }
+      ).then((res) => {
         console.log(res.data);
         window.localStorage.setItem("token", res.data.token);
-        window.localStorage.setItem("user", res.data.email);
+        window.localStorage.setItem("user", res.data.id);
       });
       navigate("/");
     } catch (error) {

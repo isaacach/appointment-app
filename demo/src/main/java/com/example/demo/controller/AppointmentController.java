@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,11 +44,19 @@ public class AppointmentController {
     return appointmentRepository.findByUserId(userId);
   }
 
-  @PostMapping("/appointments/create")
-  public ResponseEntity<Appointment> createAppointment(@RequestBody Object appointment) {
-    Appointment newAppointment = new Appointment();
-    appointment.setUser(userRepository.findByEmail(appointment.userId));
-    return ResponseEntity.ok(appointmentRepository.save(appointment));
+  @PostMapping("/appointments/create/{userId}")
+  public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointment, @PathVariable Long userId) {
+    if (userRepository.findById(userId).isPresent()) {
+      Appointment newAppointment = new Appointment();
+      newAppointment.setUser(userRepository.findById(userId).get());
+      newAppointment.setDate(appointment.getDate());
+      newAppointment.setTime(appointment.getTime());
+      newAppointment.setDescription(appointment.getDescription());
+      appointmentRepository.save(newAppointment);
+      return ResponseEntity.ok(newAppointment);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
   }
 
 }
