@@ -1,18 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const navigate = useNavigate();
-  const [isValid, setIsValid] = useState(false);
 
-
-  useEffect(() => {
-    if (window.localStorage.getItem("token") !== null) {
-      setIsValid(true);
-    }
-  }, []);
-
-  if (isValid) {
+  if (props.validity) {
     return (
       <div className="navbar">
         <div onClick={() => navigate("/")} className="navbar-logo">

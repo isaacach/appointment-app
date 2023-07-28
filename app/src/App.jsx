@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
@@ -15,10 +16,32 @@ import "./styles/navbar.css";
 import "./styles/resets.css";
 
 function App() {
+  const [isValid, setIsValid] = useState(false);
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  // const checkToken = () => {
+  //   if (token === null) {
+  //     window.setTimeout(checkToken, 100);
+  //   } else {
+  //     setIsValid(true);
+  //     setLoading(false);
+  //   }
+  // };
+  // checkToken();
+
+  // if (loading) {
+  //   return (
+  //     <div className="App">
+  //       <h1>Loading...</h1>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar validity={isValid}/>
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/about" element={<About />}></Route>
