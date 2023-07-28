@@ -30,6 +30,13 @@ export default function Calender() {
       },
     ];
   }, []);
+
+  const [value, setValue] = React.useState(new Date());
+
+  const handleDateChange = React.useCallback((event) => {
+    setValue(event.target.value);
+  }, []);
+  
 return (
   <Datepicker
     controls={["calendar", "timegrid"]}
@@ -39,6 +46,8 @@ return (
     maxTime="19:59"
     display="center"
     stepMinute={60}
+    value={value}
+    onChange={handleDateChange}
     labels={myLabels}
     invalid={myInvalid}
     theme="material"

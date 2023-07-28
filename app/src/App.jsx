@@ -15,6 +15,7 @@ import "./styles/navbar.css";
 import "./styles/resets.css";
 
 function App() {
+
   return (
     <div className="App">
       <Navbar />

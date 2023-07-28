@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const navigate = useNavigate();
-
   const [isValid, setIsValid] = useState(false);
 
+
   useEffect(() => {
-    console.log(window.localStorage.getItem("token"));
-    console.log(window.localStorage.getItem("user"));
     if (window.localStorage.getItem("token") !== null) {
       setIsValid(true);
     }

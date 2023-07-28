@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/login.css';
@@ -6,6 +6,8 @@ import '../styles/login.css';
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+  const [message, setMessage] = useState("");
 
   let navigate = useNavigate();
 
@@ -19,25 +21,33 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user = { username, password};
+    const user = { username, password };
     try {
       axios.post(`http://localhost:8080/login`, user,
       { headers: { 'Content-Type': 'application/json' } }
       ).then((res) => {
-        console.log(res.data);
         window.localStorage.setItem("token", res.data.token);
         window.localStorage.setItem("user", res.data.id);
+        setToken(res.data.token);
       });
-      navigate("/");
     } catch (error) {
       console.log(error);
+      console.log(error.request.response);
+      setMessage(error.request.response)
     }
-    
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
+
   return (
     <div className="login">
       <div>
         <h2>User Login</h2>
+        <p>{message}</p>
       </div>
       <form onSubmit={handleSubmit}>
         <label>Username:</label>

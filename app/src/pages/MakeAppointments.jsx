@@ -5,23 +5,9 @@ import Calender from '../components/Calender.jsx'
 import '../styles/makeAppointment.css'
 
 export default function MakeAppointment() {
-  const [date, setDate] = useState("")
-  const [time, setTime] = useState("")
   const [description, setDescription] = useState("")
   const userId = window.localStorage.getItem("user");
 
-
-  const handleDate = (event) => {
-    setDate(event.target.value);
-  };
-
-  const handleTime = (event) => {
-    setTime(event.target.value);
-  };
-
-  const handleDescription = (event) => {
-    setDescription(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,15 +34,15 @@ export default function MakeAppointment() {
         <h2>Make an appointment</h2>
       </div>
       <form onSubmit={handleSubmit}>  
-        <label >Appointment Date:</label>
-        <input onChange={handleDate} type="date" />
-        <label >Appointment Time:</label>
-        <input onChange={handleTime} type="time" />
-        <label>Appointment Type:</label>
-        <input onChange={handleDescription} type="text" />
+        <Calender />
+        <label>Description:</label>
+        <select type="text" value={description} onChange={(e) => setDescription(e.target.value)}>
+          <option value="hair cut">Hair cut</option>
+          <option value="eye brow">Eye brows</option>
+          <option value="spray tan">Spray tan</option>
+        </select>
         <button type="submit">Submit</button>
       </form>
-      <Calender />
     </div>
   );
 }

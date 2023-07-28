@@ -8,6 +8,7 @@ export default function Logout() {
 
   const deleteToken = () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user");
   };
 
   useEffect(() => {
