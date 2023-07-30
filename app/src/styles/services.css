@@ -11,5 +11,11 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 100px;
-  
+}
+
+.services-card {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border: 1px solid black;
 }
