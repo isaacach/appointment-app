@@ -31,7 +31,7 @@ export default function Calender() {
     ];
   }, []);
 
-  const [value, setValue] = React.useState(new Date());
+  const [value, setValue] = React.useState();
 
   const handleDateChange = React.useCallback((event) => {
     setValue(event.target.value);

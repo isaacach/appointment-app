@@ -3,5 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 50px;
   height: calc(100vh - 80px);
+}
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 100px;
+  
 }
