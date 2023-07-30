@@ -17,27 +17,15 @@ import "./styles/resets.css";
 
 function App() {
   const [isValid, setIsValid] = useState(false);
-  const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const token = window.localStorage.getItem("token");
 
+  useEffect(() => {
+    if (token !== null) {
+      console.log(token);
+      setIsValid(true);
+    }
+  }, [token]);
 
-  // const checkToken = () => {
-  //   if (token === null) {
-  //     window.setTimeout(checkToken, 100);
-  //   } else {
-  //     setIsValid(true);
-  //     setLoading(false);
-  //   }
-  // };
-  // checkToken();
-
-  // if (loading) {
-  //   return (
-  //     <div className="App">
-  //       <h1>Loading...</h1>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="App">
